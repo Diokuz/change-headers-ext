@@ -1,12 +1,22 @@
 'use strict'
 
+console.log('Initialization started')
+
 chrome.webRequest.onHeadersReceived.addListener(
   function(details) {
     if (details.url.indexOf('mm.js?') !== -1) {
+      console.log(`Intercepted request for "${details.url}"`)
+
+      const mapUrl = details.url.replace('mm.js?', 'mm.js.map?')
+
+      console.log(`Adding X-SourceMap header "${mapUrl}"`)
+
       details.responseHeaders.push({
         name: 'X-SourceMap',
-        value: details.url.replace('mm.js?', 'mm.js.map?')
+        value: mapUrl,
       })
+
+      console.log('Resulted responseHeaders', details.responseHeaders)
     }
 
     /**
@@ -20,3 +30,5 @@ chrome.webRequest.onHeadersReceived.addListener(
   },
   ['blocking', 'responseHeaders']
 )
+
+console.log('Initialization ended')
