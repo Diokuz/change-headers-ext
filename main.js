@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 chrome.webRequest.onHeadersReceived.addListener(
   function(details) {
@@ -8,8 +8,15 @@ chrome.webRequest.onHeadersReceived.addListener(
         value: details.url.replace('mm.js?', 'mm.js.map?')
       })
     }
-    return { responseHeaders: details.responseHeaders };
+
+    /**
+     * Important! Chrome devtools will not show you modified headers.
+     * So, dont be confused.
+     */
+    return { responseHeaders: details.responseHeaders }
   },
-  {urls: ['<all_urls>']},
-  [ 'blocking', 'responseHeaders']
-);
+  {
+    urls: ['<all_urls>']
+  },
+  ['blocking', 'responseHeaders']
+)

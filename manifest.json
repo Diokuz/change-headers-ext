@@ -6,6 +6,7 @@
     "permissions": [
         "webRequest",
         "*://*.tcsbank.ru/",
+        "*://*.tinkoff.ru/",
         "*://localhost:*/",
         "webRequestBlocking",
         "activeTab",
