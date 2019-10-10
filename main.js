@@ -7,7 +7,10 @@ chrome.webRequest.onHeadersReceived.addListener(
     if (details.url.indexOf('mm.js?') !== -1) {
       console.log(`Intercepted request for "${details.url}"`)
 
-      const mapUrl = details.url.replace('mm.js?', 'mm.js.map?')
+      const mapUrl = details.url.replace(
+        'https://acdn.tinkoff.ru/boxycloud/mm.js?',
+        'https://boxy-master.pfp.gke.tcsbank.ru/mm.js.map?'
+      )
 
       console.log(`Adding X-SourceMap header "${mapUrl}"`)
 
